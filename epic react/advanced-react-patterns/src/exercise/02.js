@@ -16,9 +16,18 @@ function Toggle({children}) {
   // 📜 https://react.dev/reference/react/Children
   // 📜 https://react.dev/reference/react/cloneElement
   return React.Children.map(children, child => {
-    const newChild = React.cloneElement(child, {on, toggle})
-    return newChild
+    if (allowedTypes.includes(child.type)) {
+      const newChild = React.cloneElement(child, {on, toggle})
+      return newChild
+    }
+
+    return child
   })
+}
+// eslint-disable-next-line no-use-before-define
+
+function MyToggleButton({on, toggle}) {
+  return on ? 'the button is on' : 'the button is off soooo'
 }
 
 // 🐨 Flesh out each of these components
@@ -32,13 +41,16 @@ const ToggleOff = ({on, children}) => (on ? null : children)
 // Accepts `on` and `toggle` props and returns the <Switch /> with those props.
 const ToggleButton = ({on, toggle}) => <Switch on={on} onClick={toggle} />
 
+const allowedTypes = [ToggleOn, ToggleOff, ToggleButton]
 function App() {
   return (
     <div>
       <Toggle>
         <ToggleOn>The button is on</ToggleOn>
         <ToggleOff>The button is off</ToggleOff>
+        <span>Hello</span>
         <ToggleButton />
+        <MyToggleButton />
       </Toggle>
     </div>
   )
