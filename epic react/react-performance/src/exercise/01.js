@@ -5,7 +5,7 @@ import * as React from 'react'
 
 const loadGlobe = () => import('../globe')
 
-const Globe = React.lazy(loadGlobe)
+const Globe = React.lazy(() => import(/* webpackPrefetch: true */ '../globe'))
 
 function App() {
   const [showGlobe, setShowGlobe] = React.useState(false)
@@ -23,8 +23,8 @@ function App() {
     >
       <label
         style={{marginBottom: '1rem'}}
-        onMouseEnter={loadGlobe}
-        onFocus={loadGlobe}
+        // onMouseEnter={loadGlobe}
+        // onFocus={loadGlobe}
       >
         <input
           type="checkbox"
