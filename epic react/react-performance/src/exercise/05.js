@@ -2,12 +2,13 @@
 // http://localhost:3000/isolated/exercise/05.js
 
 import * as React from 'react'
+
 import {
-  useForceRerender,
-  useDebouncedState,
   AppGrid,
-  updateGridState,
   updateGridCellState,
+  updateGridState,
+  useDebouncedState,
+  useForceRerender,
 } from '../utils'
 
 const AppStateContext = React.createContext()
@@ -38,8 +39,8 @@ function AppProvider({children}) {
     dogName: '',
     grid: initialGrid,
   })
-  // 🐨 memoize this value with React.useMemo
-  const value = [state, dispatch]
+
+  const value = React.useMemo(() => [state, dispatch], [state, dispatch])
   return (
     <AppStateContext.Provider value={value}>
       {children}
