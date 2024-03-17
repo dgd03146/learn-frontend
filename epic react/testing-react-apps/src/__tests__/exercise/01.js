@@ -11,13 +11,16 @@ import {createRoot} from 'react-dom/client'
 // NOTE: this is a new requirement in React 18
 // https://react.dev/blog/2022/03/08/react-18-upgrade-guide#configuring-your-testing-environment
 // Luckily, it's handled for you by React Testing Library :)
-// global.IS_REACT_ACT_ENVIRONMENT = true
+global.IS_REACT_ACT_ENVIRONMENT = true
 
 test('counter increments and decrements when the buttons are clicked', () => {
   const div = document.createElement('div')
   document.body.append(div)
 
   ReactDOM.render(<Counter />, div)
+  const message = div.firstChild.querySelector('div')
+
+  expect(message.textContent).toBe('Cureent count: 0')
 
   // 🐨 get a reference to the increment and decrement buttons:
   //   💰 div.querySelectorAll('button')
