@@ -2,21 +2,23 @@
 // http://localhost:3000/counter
 
 import * as React from 'react'
+
+import Counter from '../../components/counter'
+import ReactDOM from 'react-dom'
 import {act} from 'react-dom/test-utils'
 import {createRoot} from 'react-dom/client'
-import Counter from '../../components/counter'
 
 // NOTE: this is a new requirement in React 18
 // https://react.dev/blog/2022/03/08/react-18-upgrade-guide#configuring-your-testing-environment
 // Luckily, it's handled for you by React Testing Library :)
-global.IS_REACT_ACT_ENVIRONMENT = true
+// global.IS_REACT_ACT_ENVIRONMENT = true
 
 test('counter increments and decrements when the buttons are clicked', () => {
-  // 🐨 create a div to render your component to (💰 document.createElement)
-  //
-  // 🐨 append the div to document.body (💰 document.body.append)
-  //
-  // 🐨 use createRoot to render the <Counter /> to the div
+  const div = document.createElement('div')
+  document.body.append(div)
+
+  ReactDOM.render(<Counter />, div)
+
   // 🐨 get a reference to the increment and decrement buttons:
   //   💰 div.querySelectorAll('button')
   // 🐨 get a reference to the message div:
