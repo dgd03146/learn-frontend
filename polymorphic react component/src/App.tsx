@@ -15,7 +15,7 @@ function App() {
     <div>
       <h1>Hello Polymorphic Component</h1>
       <Text as="h1">H1 Component</Text>
-      <Text as="h2" color="red">
+      <Text as="h2" color="orange" style={{ color: 'black' }}>
         H2 Component
       </Text>
       <Text as="p">Paragraph Component</Text>
