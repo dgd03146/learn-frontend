@@ -10,7 +10,9 @@ function App() {
       <Text as="h2" href="hihi">
         H2 Component
       </Text>
-      <Text as="p">Paragraph Component</Text>
+      <Text as="p" hihi="">
+        Paragraph Component
+      </Text>
       <Text as="a" href="hihi">
         Span Component
       </Text>
