@@ -10,16 +10,24 @@ type Rainbow =
   | 'indigo'
   | 'violet';
 
-type TextProps<C extends React.ElementType> = {
+type AsProp<C extends React.ElementType> = {
   as?: C;
+};
+
+type TextProps = {
   color?: Rainbow | 'black';
 };
 
-type Props<C extends React.ElementType> = React.PropsWithChildren<
-  TextProps<C>
-> &
-  Omit<React.ComponentPropsWithoutRef<C>, keyof TextProps<C>>;
-// 겹쳐서 빼야할 타입을 TextProps에 넣고 keyof로 Omit
+type PropswithAs<C extends React.ElementType, Props> = Props & AsProp<C>;
+
+type PropsToOmit<C extends React.ElementType, P> = keyof PropswithAs<C, P>;
+// omit할 타입들을 Props에 넣는다.
+
+type PolymorphicComponentProps<
+  C extends React.ElementType,
+  Props = Record<string, never>,
+> = React.PropsWithChildren<PropswithAs<C, Props>> &
+  Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
 export const Text = <C extends React.ElementType = 'span'>({
   as,
@@ -27,7 +35,7 @@ export const Text = <C extends React.ElementType = 'span'>({
   color,
   children,
   ...restProps
-}: Props<C>) => {
+}: PolymorphicComponentProps<C, TextProps>) => {
   const Component = as || 'span';
 
   const internalStyles = color ? { style: { color, ...style } } : {};
