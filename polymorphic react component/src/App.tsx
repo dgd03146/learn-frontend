@@ -13,7 +13,7 @@ const Emphasis = ({ children }: { children: React.ReactNode }) => {
 
 function App() {
   const ref = useRef<HTMLAnchorElement | null>(null);
-  const ref2 = useRef<HTMLHeadElement | null>(null);
+  const ref2 = useRef<HTMLHeadingElement | null>(null);
 
   return (
     <div>
@@ -21,7 +21,7 @@ function App() {
       <Text as="h1" ref={ref}>
         H1 Component
       </Text>
-      <Text as="h2" color="orange" style={{ color: 'black' }}>
+      <Text as="h2" ref={ref2} color="orange" style={{ color: 'black' }}>
         H2 Component
       </Text>
       <Text as="p">Paragraph Component</Text>

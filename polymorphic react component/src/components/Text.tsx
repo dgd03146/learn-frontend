@@ -29,13 +29,23 @@ type PolymorphicComponentProps<
 > = React.PropsWithChildren<PropswithAs<C, Props>> &
   Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
-type Props<C extends React.ElementType, P> = PolymorphicComponentProps<C, P>;
-
 type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>['ref'];
 // ref만 가지고옴
 
-export const Text = React.forwardRef(
+type Props<C extends React.ElementType, P> = PolymorphicComponentProps<C, P>;
+
+type PolymorphicComponentPropsWithRef<
+  C extends React.ElementType,
+  P,
+> = PolymorphicComponentProps<C, P> & { ref?: PolymorphicRef<C> };
+// ref 추가
+
+type TextComponent = <C extends React.ElementType>(
+  props: PolymorphicComponentPropsWithRef<C, TextProps>,
+) => React.ReactNode | null;
+
+export const Text: TextComponent = React.forwardRef(
   <C extends React.ElementType = 'span'>(
     { as, style, color, children, ...restProps }: Props<C, TextProps>,
     ref?: PolymorphicRef<C>,
