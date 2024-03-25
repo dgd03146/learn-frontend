@@ -1,9 +1,8 @@
-export const Text = ({
+export const Text = <C extends React.ElementType>({
   as,
   children,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  as?: any;
+  as?: C;
   children: React.ReactNode;
 }) => {
   const Component = as || 'span';
