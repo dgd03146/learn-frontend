@@ -2,20 +2,25 @@ import './App.css';
 
 import { Text } from './components';
 
+const Emphasis = ({ children }: { children: React.ReactText }) => {
+  return (
+    <em style={{ background: 'yellow', color: 'black', fontSize: '40px' }}>
+      {children}
+    </em>
+  );
+};
+
 function App() {
   return (
     <div>
       <h1>Hello Polymorphic Component</h1>
       <Text as="h1">H1 Component</Text>
-      <Text as="h2" href="hihi">
-        H2 Component
-      </Text>
-      <Text as="p" hihi="">
-        Paragraph Component
-      </Text>
+      <Text as="h2">H2 Component</Text>
+      <Text as="p">Paragraph Component</Text>
       <Text as="a" href="hihi">
-        Span Component
+        a tag Component
       </Text>
+      <Text as={Emphasis}>This is important You are awesome!</Text>
     </div>
   );
 }
