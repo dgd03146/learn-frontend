@@ -1,10 +1,12 @@
+type TextProps<C extends React.ElementType> = {
+  as?: C;
+  children: React.ReactNode;
+} & React.ComponentPropsWithoutRef<C>;
+
 export const Text = <C extends React.ElementType>({
   as,
   children,
-}: {
-  as?: C;
-  children: React.ReactNode;
-}) => {
+}: TextProps<C>) => {
   const Component = as || 'span';
 
   return <Component>{children}</Component>;
